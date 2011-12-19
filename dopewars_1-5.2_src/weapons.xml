@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<weapons-list>
+	<weapon>
+		<name>Knife</name>
+		<price>300</price>
+		<damage>2</damage>
+	</weapon>
+	<weapon>
+		<name>Pistol</name>
+		<price>1200</price>
+		<damage>8</damage>
+	</weapon>
+	<weapon>
+		<name>Rifle</name>
+		<price>5000</price>
+		<damage>14</damage>
+	</weapon>
+	<weapon>
+		<name>Machine-Gun</name>
+		<price>9000</price>
+		<damage>23</damage>
+	</weapon>
+	<weapon>
+		<name>Bazooka</name>
+		<price>15000</price>
+		<damage>40</damage>
+	</weapon>
+</weapons-list>

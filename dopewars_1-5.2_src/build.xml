@@ -1,0 +1,55 @@
+<project name="dopewars" default="compile" basedir=".">
+	<property name="project.name" value="dopewars"/>
+	<property name="project.home" value="c:/dopewars"/>
+	<property name="project.src" value="c:/dopewars/src"/>
+	<property name="project.conf" value="c:/dopewars/jar"/>
+	<property name="project.classes" value="c:/dopewars/classes"/>
+	<property name="conf.mf" location="${project.conf}/${project.name}.mf"/>
+	<property name="dist.home" value="c:/dopewars/dist"/>
+	<property name="dist.jar" value="${dist.home}/${project.name}.jar"/>
+	<property name="dist.zip" value="${dist.home}/${project.name}.zip"/>
+
+	<path id="custom.cp_ref">
+    <pathelement location="${project.classes}" />
+	</path>
+
+	<target name="init">
+		<mkdir dir="${project.classes}"/>
+		<mkdir dir="${dist.home}"/> 
+	</target>
+
+	<target name="clean">
+		<delete dir="${project.classes}"/>
+	</target>
+
+	<target name="distclean" depends="clean">
+		<delete dir="${dist.home}"/>
+		<delete file="${dist.zip}"/>
+	</target>
+
+	<target name="compile" depends="init">
+	 <javac srcdir="${project.src}" destdir="${project.classes}" debug="on" verbose="off" />
+	</target>
+
+	<target name="dist" depends="compile">
+		<!-- create jar file of classes with custom manifest -->
+		<jar jarfile="${dist.jar}" 
+			basedir="${project.classes}"
+			manifest="${conf.mf}">
+		</jar>
+
+		<!-- overlay content of bin dir into dist dir -->
+		<copy todir="${dist.home}">
+			<fileset dir="${project.bin}"/>
+		</copy>
+
+		<!-- package the application as a zip file -->
+		<zip zipfile="${dist.zip}"
+			basedir="${dist.home}">
+		</zip>
+	</target>
+
+ <target name="testgui" depends="compile">
+	<java classname="com.codecowboy.dopewar.application.Dopewars" classpathref="custom.cp_ref" fork="yes"/>
+</target>
+</project>
